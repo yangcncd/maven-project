@@ -11,10 +11,9 @@ public class Person {
   public Person() {
 
   }
- 
+
   /**
-   * 
-   * @param someone
+   * @param someone String 
    * @return String
    */
   public final String person(final String someone) {
