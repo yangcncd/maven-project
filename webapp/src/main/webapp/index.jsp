@@ -1,2 +1,2 @@
 Hello, Welcome to this jenkinns course!
-After Building deploy to tomcat
+After Building deploy to stage, and then to prod
