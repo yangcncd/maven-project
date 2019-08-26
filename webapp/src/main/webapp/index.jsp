@@ -6,3 +6,4 @@ After Building deploy to stage, and then to prod! <br/>
 use bat instead sh in jenkinsfile<br/>
 test if .war under workspace\deploy-course-maven-project-to-prod-for-pipeline\webapp\target automatic updated <br/>
 dont forget **/*.war in copy artifact
+configure configure
