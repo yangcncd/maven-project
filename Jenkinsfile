@@ -15,5 +15,10 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to stage (localhost:8081)'){
+        	steps{
+        		build job: 'deploy-course-maven-project' 
+        	}
+        }
     }
 }
