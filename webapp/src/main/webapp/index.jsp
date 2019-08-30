@@ -7,3 +7,4 @@ use bat instead sh in jenkinsfile<br/>
 test if .war under workspace\deploy-course-maven-project-to-prod-for-pipeline\webapp\target automatic updated <br/>
 dont forget **/*.war in copy artifact<br/>
 manuell last last<br/> 
+this time on AWS<br/> 
