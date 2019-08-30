@@ -1,9 +1,19 @@
 pipeline {
     agent any
+    
     tools{
         maven 'local_maven'
+    } 
+    
+    parameters { 
+             string(name: 'tomcat_dev', defaultValue: '18.222.30.118', description: 'Staging Server') 
+             string(name: 'tomcat_prod', defaultValue: '3.14.5.101', description: 'Production Server') 
+    } 
+    
+    triggers { 
+             pollSCM('* * * * *') // Polling Source Control 
     }
-
+    
     stages{
         stage('Build'){
             steps {
@@ -16,29 +26,22 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to staging'){
-            steps{
-                build job:'deploy-course-maven-project-for-pipeline'
-            }
+        
+        stage('Deployment to AWS Stage and Prod'){ 
+                parallel{v
+	                    stage ('Deploy to Staging'){
+	                        steps { 
+	                            bat "winscp -i /home/jenkins/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat8/webapps" 
+	                        } 
+	                    } 
+	                    stage ("Deploy to Production"){ 
+	                        steps { 
+	                            bat "winscp -i /home/jenkins/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat8/webapps" 
+	                        } 
+	                    }
+
+                }
         }
-
-        stage ('Deploy to Production'){
-            steps{
-                timeout(time:5, unit:'DAYS'){
-                    input message:'should war be deployed to prod environment ?' 
-                }
-
-                build job: 'deploy-course-maven-project-to-prod-for-pipeline'
-            }
-            post {
-                success {
-                    echo 'successfully deployed to prod environment'
-                }
-
-                failure {
-                    echo 'failed to deploy to prod'
-                }
-            }
-        } 
+ 
     }
 }
