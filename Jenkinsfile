@@ -31,12 +31,12 @@ pipeline {
                 parallel{v
 	                    stage ('Deploy to Staging'){
 	                        steps { 
-	                            bat "winscp -i /home/jenkins/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat8/webapps" 
+	                            bat "winscp -i C:\Users\dings\Desktop\tmp-aws-for-jenkins\tomcat-demo.pem.txt **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat8/webapps" 
 	                        } 
 	                    } 
 	                    stage ("Deploy to Production"){ 
 	                        steps { 
-	                            bat "winscp -i /home/jenkins/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat8/webapps" 
+	                            bat "winscp -i C:\Users\dings\Desktop\tmp-aws-for-jenkins\tomcat-demo.pem.txt **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat8/webapps" 
 	                        } 
 	                    }
 
